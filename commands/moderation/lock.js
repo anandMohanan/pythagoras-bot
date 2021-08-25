@@ -2,6 +2,8 @@ const { Client, Message, MessageEmbed } = require("discord.js");
 module.exports = {
   name: "lock",
   description: "locks the whole server",
+  userPermissions: ["MANAGE_CHANNELS"],
+  botPermissions: ["MANAGE_CHANNELS"],
   /**
    *
    * @param {Client} client
@@ -9,12 +11,6 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    if (!message.member.permissions.has("MANAGE_CHANNELS")) {
-      return message.reply({
-        content: `You dont have enough permissions to kick members`,
-        allowedMentions: { repliedUser: false },
-      });
-    }
     const channels = message.guild.channels.cache.filter(
       (ch) => ch.type !== "category"
     );

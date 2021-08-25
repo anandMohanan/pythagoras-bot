@@ -17,6 +17,14 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
+    const emoji = {
+      actions: "👊",
+      fun: "😀",
+      general: "ℹ️",
+      image: "🖼️",
+      moderation: "🔨",
+      together: "👪",
+    };
     const directories = [
       ...new Set(client.commands.map((cmd) => cmd.directory)),
     ];
@@ -61,6 +69,7 @@ module.exports = {
                 label: cmd.directory,
                 value: cmd.directory.toUpperCase(),
                 description: `Commands From ${cmd.directory} Category.`,
+                emoji: emoji[cmd.directory.toLowerCase()] || null,
               };
             })
           )

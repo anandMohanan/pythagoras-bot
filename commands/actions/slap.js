@@ -16,7 +16,7 @@ module.exports = {
         content: " please tag someone",
         allowedMentions: { repliedUser: false },
       });
-    const body = await fetch("https://api.waifu.pics/sfw/hug");
+    const body = await fetch("https://api.waifu.pics/sfw/slap");
     const image = await body.json();
     let user = message.mentions.users.first();
     const embed = new MessageEmbed()
@@ -24,6 +24,6 @@ module.exports = {
       .setImage(image.url)
       .setColor("#cce1f2");
 
-      message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
+    message.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
   },
 };

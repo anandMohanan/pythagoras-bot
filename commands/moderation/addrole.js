@@ -2,6 +2,8 @@ const { Client, Message, MessageEmbed } = require("discord.js");
 module.exports = {
   name: "addrole",
   description: "adds the role to the mentioned user",
+  userPermissions: ["MANAGE_ROLES"],
+  botPermissions: ["MANAGE_ROLES"],
   /**
    *
    * @param {Client} client
@@ -9,15 +11,6 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    if (!message.member.permissions.has("MANAGE_ROLES")) {
-      return message
-        .reply({
-          content: `You do not have MANAGE_ROLES permission`,
-          allowedMentions: { repliedUser: false },
-        })
-        .then((m) => m.delete({ timeout: 50000 }));
-    }
-
     if (!args[0] || !args[1]) {
       return message.reply({
         content: "usage: <username || user id> <role name || id>",

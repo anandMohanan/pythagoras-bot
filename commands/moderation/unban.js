@@ -2,6 +2,8 @@ const { Client, Message, MessageEmbed } = require("discord.js");
 module.exports = {
   name: "unban",
   description: "unbans a user",
+  userPermissions: ["BAN_MEMBERS"],
+  botPermissions: ["BAN_MEMBERS"],
   /**
    *
    * @param {Client} client
@@ -9,12 +11,6 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    if (!message.member.permissions.has("BAN_MEMBERS")) {
-      return message.reply({
-        content: `You dont have enough permissions to ban members`,
-        allowedMentions: { repliedUser: false },
-      });
-    }
     if (!args[0]) {
       return message.reply({
         content: `Please mention a user!`,

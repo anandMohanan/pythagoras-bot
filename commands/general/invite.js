@@ -10,6 +10,7 @@ module.exports = {
   name: "invite",
   description: "returns an invite link to invite the bot to your server",
   aliases: ["inv"],
+
   /**
    *
    * @param {Client} client
