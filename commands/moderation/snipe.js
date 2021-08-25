@@ -3,8 +3,6 @@ const { Message, Client, MessageEmbed } = require("discord.js");
 module.exports = {
   name: "snipe",
   description: "shows previously deleted message",
-  userPermissions: ["MANAGE_MESSAGES"],
-  botPermissions: ["MANAGE_MESSAGES"],
 
   /**
    *
@@ -13,6 +11,10 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
+    if (!message.member.permissions.has("MANAGE_MESSAGES"))
+      return message.reply(
+        "you do not have enough permissions to run this command"
+      );
     try {
       const snipes = client.snipes.get(message.channel.id);
       if (!snipes) {

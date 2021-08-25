@@ -4,8 +4,7 @@ module.exports = {
   name: "purge",
   aliases: ["prune"],
   description: "deletes the messages",
-  userPermissions: ["MANAGE_MESSAGES"],
-  botPermissions: ["MANAGE_MESSAGES"],
+
   /**
    *
    * @param {Client} client
@@ -13,6 +12,10 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
+    if (!message.member.permissions.has("MANAGE_MESSAGES"))
+      return message.reply(
+        "you do not have enough permissions to run this command"
+      );
     const amount = parseInt(args[0]);
     if (isNaN(amount)) {
       return message.reply({
