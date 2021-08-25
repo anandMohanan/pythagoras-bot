@@ -1,5 +1,4 @@
 {
-    "token": "your bot's token",
-    "prefix": "!",
-    "mongooseConnectionString": ""
+  "owners": ["376632059923267584"],
+  "prefix": "!"
 }
