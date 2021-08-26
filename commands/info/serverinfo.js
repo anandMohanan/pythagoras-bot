@@ -1,7 +1,7 @@
 const { Client, Message, MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "serversinfo",
+  name: "serverinfo",
   description: "shows information about the server",
   aliases: ["si"],
 
@@ -21,8 +21,8 @@ module.exports = {
     //   `CREATED: ${guild.createdAt.getDate()}-${guild.createdAt.getMonth()}month-${guild.createdAt.getFullYear()}year`
     // );
 
-    console.log(guild.iconURL());
-    console.log(guild.bannerURL());
+    // console.log(guild.iconURL());
+    // console.log(guild.bannerURL());
     //console.log(guild.channels.cache.filter((ch) => ch.type == "GUILD_TEXT"));
     const embed = new MessageEmbed()
       .setTitle(guild.name)
@@ -49,7 +49,8 @@ module.exports = {
           `Created: \`${guild.createdAt.getDate()}-${guild.createdAt.getMonth()}-${guild.createdAt.getFullYear()}\``,
         ].join("\n")
       )
-      .setImage(guild.bannerURL());
+      .setImage(guild.bannerURL())
+      .setColor("#cce1f2");
     return message.reply({ embeds: [embed] });
     //message.channel.send("yes");
   },
