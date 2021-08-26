@@ -51,7 +51,10 @@ module.exports = {
       )
       .setImage(guild.bannerURL())
       .setColor("#cce1f2");
-    return message.reply({ embeds: [embed] });
+    return message.reply({
+      embeds: [embed],
+      allowedMentions: { repliedUser: false },
+    });
     //message.channel.send("yes");
   },
 };
