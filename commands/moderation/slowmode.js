@@ -3,6 +3,8 @@ const ms = require("ms");
 module.exports = {
   name: "slowmode",
   description: "slowmode channel",
+  userPermissions: ["MANAGE_CHANNELS"],
+  botPermissions: ["MANAGE_CHANNELS"],
 
   /**
    *
@@ -11,10 +13,6 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    if (!message.member.permissions.has("MANAGE_CHANNELS"))
-      return message.reply(
-        "you do not have enough permissions to run this command"
-      );
     if (!args[0]) {
       return message.reply({
         content: "You did not specify a time!",

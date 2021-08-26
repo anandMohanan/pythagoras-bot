@@ -20,8 +20,9 @@ module.exports = {
     const emoji = {
       actions: "👊",
       fun: "😀",
-      general: "ℹ️",
+      general: "✨",
       image: "🖼️",
+      info: "ℹ️",
       moderation: "🔨",
       together: "👪",
     };

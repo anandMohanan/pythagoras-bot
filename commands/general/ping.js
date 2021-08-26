@@ -3,6 +3,7 @@ const { Message, Client, MessageEmbed } = require("discord.js");
 module.exports = {
   name: "ping",
   description: "returns websocket ping",
+  //timeout: 10000000,
   /**
    *
    * @param {Client} client

@@ -13,6 +13,7 @@ client.slashCommands = new Collection();
 client.aliases = new Collection();
 client.config = require("./config.json");
 client.snipes = new Collection();
+client.timeout = new Collection();
 client.discordTogether = new DiscordTogether(client);
 // Initializing the project
 require("./handler")(client);

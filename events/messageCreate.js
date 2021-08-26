@@ -1,3 +1,5 @@
+const ms = require("ms");
+const { timeout } = require("../index");
 const client = require("../index");
 
 client.on("messageCreate", async (message) => {
@@ -16,14 +18,34 @@ client.on("messageCreate", async (message) => {
   const command =
     client.commands.get(cmd.toLowerCase()) ||
     client.commands.get(client.aliases.get(cmd.toLowerCase()));
-  // if (!message.member.permissions.has(command.userPermissions || []))
-  //   return message.reply(
-  //     "you do not have enough permissions to run this command"
-  //   );
-  // if (!message.guild.me.permissions.has(command.botPermissions || []))
-  //   return message.reply(
-  //     "i do not have enough permissions to run this command"
-  //   );
   if (!command) return;
-  await command.run(client, message, args);
+
+  if (!message.member.permissions.has(command.userPermissions || []))
+    return message.reply(
+      "you do not have enough permissions to run this command"
+    );
+  if (!message.guild.me.permissions.has(command.botPermissions || []))
+    return message.reply(
+      "i do not have enough permissions to run this command"
+    );
+
+  if (command) {
+    // if (command.timeout) {
+    //   if (timeout.has(`${command.name}${message.author.id}`))
+    //     return message.channel.send(
+    //       `You are on a  \`${ms(
+    //         timeout.get(`${command.name}${message.author.id}`) - Date.now(),
+    //         { long: true }
+    //       )}\` cooldown`
+    //     );
+    await command.run(client, message, args);
+    // timeout.set(
+    //   `${command.name}${message.author.id}`,
+    //   Date.now() + command.timeout
+    // );
+    // setTimeout(() => {
+    //   timeout.delete(`${command.name}${message.author.id}`);
+    // }, command.timeout);
+    //}
+  }
 });

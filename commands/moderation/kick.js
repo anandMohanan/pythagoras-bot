@@ -3,6 +3,8 @@ const { Message, Client, MessageEmbed } = require("discord.js");
 module.exports = {
   name: "kick",
   description: "kicks the mentioned user",
+  userPermissions: ["KICK_MEMBERS"],
+  botPermissions: ["KICK_MEMBERS"],
 
   /**
    *
@@ -11,10 +13,6 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
-    if (!message.member.permissions.has("KICK_MEMBERS"))
-      return message.reply(
-        "you do not have enough permissions to run this command"
-      );
     if (!args[0]) {
       return message.reply({
         content: `Please mention a user!`,
