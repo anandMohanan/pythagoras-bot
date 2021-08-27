@@ -26,7 +26,7 @@ module.exports = {
 
     let avatar = await user.displayAvatarURL({ dynamic: false, format: "png" });
     let image = await new DIG.Wanted().getImage(avatar);
-    let attach = new Discord.MessageAttachment(image, "wanted.png");
+    let attach = new MessageAttachment(image, "wanted.png");
     const embed = new MessageEmbed()
       .setTimestamp()
       .setColor("#cce1f2")

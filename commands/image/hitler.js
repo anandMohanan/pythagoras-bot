@@ -26,7 +26,7 @@ module.exports = {
 
     let avatar = await user.displayAvatarURL({ dynamic: false, format: "png" });
     let image = await new DIG.Hitler().getImage(avatar);
-    let attach = new Discord.MessageAttachment(image, "hitler.png");
+    let attach = new MessageAttachment(image, "hitler.png");
     const embed = new MessageEmbed()
       .setTimestamp()
       .setColor("#cce1f2")

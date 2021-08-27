@@ -57,14 +57,7 @@ module.exports = {
     }
 
     let avatar = user.displayAvatarURL({ size: 4096, dynamic: true });
-    let avatarEmbed = new MessageEmbed()
-      .setImage(avatar)
-      .setColor("#cce1f2")
-      .setFooter(
-        message.member.displayName,
-        message.author.displayAvatarURL({ dynamic: true })
-      )
-      .setTimestamp();
+    let avatarEmbed = new MessageEmbed().setImage(avatar).setColor("#cce1f2");
     return message.reply({
       embeds: [avatarEmbed],
       allowedMentions: { repliedUser: false },

@@ -1,6 +1,5 @@
 const {
   Client,
-  Message,
   MessageEmbed,
   MessageActionRow,
   MessageSelectMenu,
@@ -9,15 +8,14 @@ const {
 
 module.exports = {
   name: "help",
-  aliases: ["h"],
   description: "Shows you the list of commands.",
   /**
    *
    * @param {Client} client
-   * @param {Message} message
+   * @param {CommandInteraction} interaction
    * @param {String[]} args
    */
-  run: async (client, message, args) => {
+  run: async (client, interaction, args) => {
     const emoji = {
       actions: "👊",
       fun: "😀",
@@ -61,7 +59,7 @@ module.exports = {
     const components = (state) => [
       new MessageActionRow().addComponents(
         new MessageSelectMenu()
-          .setCustomId("help-menu")
+          .setCustomId("help")
           .setPlaceholder("Click to see all Categories.")
 
           .setDisabled(state)
@@ -78,7 +76,7 @@ module.exports = {
       ),
     ];
 
-    const initialMessage = await message.reply({
+    const initialMessage = await interaction.followUp({
       embeds: [embed],
       components: components(false),
       allowedMentions: { repliedUser: false },
@@ -89,9 +87,9 @@ module.exports = {
      * @returns
      */
     const filter = (helpInteraction) =>
-      helpInteraction.user.id === message.author.id &&
-      helpInteraction.customId === "help-menu";
-    const collector = message.channel.createMessageComponentCollector({
+      helpInteraction.user.id === interaction.user.id &&
+      helpInteraction.customId === "help";
+    const collector = interaction.channel.createMessageComponentCollector({
       filter,
       componentType: "SELECT_MENU",
       time: 10000,
