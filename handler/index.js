@@ -40,11 +40,14 @@ module.exports = async (client) => {
     client.slashCommands.set(file.name, file);
     //client.application.commands.set([]);
     // client.slashCommands.set([]);
+    if (["MESSAGE", "USER"].includes(file.type)) delete file.description;
     arrayOfSlashCommands.push(file);
   });
   client.on("ready", async () => {
     // Register for a single guild
-    await client.guilds.cache.get("726513126958301264").commands.set([]);
+    // await client.guilds.cache
+    //   .get("855344109795540993")
+    //   .commands.set(arrayOfSlashCommands);
     //client.application.commands.set([]);
     // Register for all the guilds the bot is in
     await client.application.commands.set(arrayOfSlashCommands);

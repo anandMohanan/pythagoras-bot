@@ -12,7 +12,7 @@ module.exports = {
   run: async (client, message, args) => {
     let mentionedMember =
       message.mentions.members.first() ||
-      message.guild.members.cache.get(args[0]) ||
+      message.guild.members.cache.get(args[0]).user ||
       message.member;
     var status = mentionedMember.presence.status;
     if (status == "dnd") status = "Do Not Disturb";

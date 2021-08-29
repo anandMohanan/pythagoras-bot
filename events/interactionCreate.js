@@ -2,7 +2,7 @@ const client = require("../index");
 
 client.on("interactionCreate", async (interaction) => {
   // Slash Command Handling
-  if (!interaction.isCommand()) return;
+
   if (interaction.isCommand()) {
     await interaction.deferReply({ ephemeral: false }).catch(() => {});
 
@@ -24,5 +24,14 @@ client.on("interactionCreate", async (interaction) => {
     );
 
     cmd.run(client, interaction, args);
+  }
+  //if (!interaction.isCommand()) return;
+  // Context Menu Handling
+  if (interaction.isContextMenu()) {
+    //console.log("hello");
+    await interaction.deferReply({ ephemeral: false });
+    const command = client.slashCommands.get(interaction.commandName);
+    //console.log(command);
+    if (command) command.run(client, interaction);
   }
 });
