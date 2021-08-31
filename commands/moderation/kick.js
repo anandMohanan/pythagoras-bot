@@ -34,7 +34,7 @@ module.exports = {
       });
     } catch (e) {
       return message.reply({
-        content: "User is not in this server!",
+        content: "User is not in this server or That user is a mod/admin",
         allowedMentions: { repliedUser: false },
       });
     }
