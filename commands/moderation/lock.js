@@ -15,40 +15,61 @@ module.exports = {
     const channels = message.guild.channels.cache.filter(
       (ch) => ch.type !== "category"
     );
-    if (args[0] === "on") {
-      channels.forEach((channel) => {
-        channel.permissionOverwrites
-          .edit(message.guild.roles.everyone, {
-            SEND_MESSAGES: false,
-          })
-          .then(() => {
-            channel.setName((channel.name += `🔒`));
-          });
-      });
-      let lockdone = new MessageEmbed()
-        .setColor("#cce1f2")
-        .setDescription(`locked all channels`);
-      return message.reply({
-        embeds: [lockdone],
-        allowedMentions: { repliedUser: false },
-      });
-    } else if (args[0] === "off") {
-      channels.forEach((channel) => {
-        channel.permissionOverwrites
-          .edit(message.guild.roles.everyone, {
-            SEND_MESSAGES: true,
-          })
-          .then(() => {
-            channel.setName(channel.name.replace("🔒", ""));
-          });
-      });
-      let unlockdone = new MessageEmbed()
-        .setColor("#cce1f2")
-        .setDescription(`unlocked all channels`);
-      return message.reply({
-        embeds: [unlockdone],
-        allowedMentions: { repliedUser: false },
-      });
+    if (!args[0]) {
+      message.channel.send({ content: "usage =lock <on> || <off>" });
+    }
+    try {
+      if (args[0] === "on") {
+        channels.forEach((channel) => {
+          // channel.permissionOverwrites
+          //   .edit(message.guild.roles.everyone, {
+          //     SEND_MESSAGES: false,
+          //   })
+          channel.permissionOverwrites
+            .edit(
+              message.guild.roles.cache.find(
+                (e) => e.name.toLowerCase().trim() === "@everyone"
+              ),
+              {
+                SEND_MESSAGES: false,
+              }
+            )
+            .then(() => {
+              channel.setName((channel.name += `🔐`));
+            });
+        });
+        let lockdone = new MessageEmbed()
+          .setColor("#cce1f2")
+          .setDescription(`locked all channels`);
+        return message.reply({
+          embeds: [lockdone],
+          allowedMentions: { repliedUser: false },
+        });
+      } else if (args[0] === "off") {
+        channels.forEach((channel) => {
+          channel.permissionOverwrites
+            .edit(
+              message.guild.roles.cache.find(
+                (e) => e.name.toLowerCase().trim() === "@everyone"
+              ),
+              {
+                SEND_MESSAGES: true,
+              }
+            )
+            .then(() => {
+              channel.setName(channel.name.replace("🔐", ""));
+            });
+        });
+        let unlockdone = new MessageEmbed()
+          .setColor("#cce1f2")
+          .setDescription(`unlocked all channels`);
+        return message.reply({
+          embeds: [unlockdone],
+          allowedMentions: { repliedUser: false },
+        });
+      }
+    } catch (e) {
+      console.log(e);
     }
   },
 };

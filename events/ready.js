@@ -1,6 +1,6 @@
 const client = require("../index");
 
-client.on("ready", () => {
+client.once("ready", () => {
   //   let status = [
   //     "Above all things, reverence yourself.",
   //     "Concern should drive us into action and not into a depression. No man is free who cannot control himself.",

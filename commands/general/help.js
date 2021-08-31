@@ -119,6 +119,7 @@ module.exports = {
           })
         );
       // helpInteraction.deferReply();
+
       helpInteraction.update({ embeds: [upem] });
     });
 

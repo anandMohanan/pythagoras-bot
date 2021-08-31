@@ -5,6 +5,7 @@ const client = new Client({
 });
 module.exports = client;
 const { DiscordTogether } = require("discord-together");
+
 require("dotenv").config();
 
 // Global Variables
@@ -15,6 +16,7 @@ client.config = require("./config.json");
 client.snipes = new Collection();
 client.timeout = new Collection();
 client.discordTogether = new DiscordTogether(client);
+
 // Initializing the project
 require("./handler")(client);
 
